@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: account-service
+  cloud:
+    stream:
+      bindings:
+        output:
+          contentType: "application/json"
+          destination: verifications
