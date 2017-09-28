@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: message-subscription-service
+  cloud:
+    stream:
+      bindings:
+        input:
+          contentType: "application/json"
+          destination: verifications
+        output1:
+          contentType: "application/json"
+          destination: verifications1
+

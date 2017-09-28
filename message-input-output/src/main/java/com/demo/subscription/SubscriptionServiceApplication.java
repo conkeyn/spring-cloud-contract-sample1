@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableBinding(Sink.class)
+@EnableBinding({Sink.class,Output1.class})
 public class SubscriptionServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SubscriptionServiceApplication.class, args);

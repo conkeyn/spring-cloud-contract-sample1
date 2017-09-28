@@ -4,14 +4,13 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class SubscriptionService {
-
     AtomicInteger eligibleCounter = new AtomicInteger();
     AtomicInteger notEligibleCounter = new AtomicInteger();
-
     @StreamListener(Sink.INPUT)
     public void listen(Verification verification){
 
@@ -21,4 +20,8 @@ public class SubscriptionService {
             notEligibleCounter.incrementAndGet();
         }
     }
+   static class Verification implements Serializable {
+        public boolean eligible;
+    }
 }
+
