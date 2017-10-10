@@ -12,7 +12,10 @@
         <module>account-service</module>
         <module>subscription-service</module>
         <module>message-account-service</module>
+        <module>message-input-output</module>
+        <module>stubs-per-consumer-producer</module>
         <module>message-subscription-service</module>
+        <module>stubs-per-consumer-consumer</module>
     </modules>
 
      <parent>

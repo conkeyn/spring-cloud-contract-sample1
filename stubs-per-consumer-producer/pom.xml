@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>message-input-output</artifactId>
+    <artifactId>stubs-per-consumer-producer</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -29,6 +29,11 @@
             <artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -36,15 +41,31 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- SPRING CLOUD CONTRACT -->
-            <!-- tag::test_dep_in_plugin[] -->
             <plugin>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-contract-maven-plugin</artifactId>
                 <version>${spring-cloud-contract.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <packageWithBaseClasses>com.demo.subscription.contracts</packageWithBaseClasses>
+                    <baseClassMappings>
+                        <baseClassMapping>
+                            <contractPackageRegex>.*bar.*message.*</contractPackageRegex>
+                            <baseClassFQN>com.demo.account.contracts.MessageServiceBar</baseClassFQN>
+                        </baseClassMapping>
+                        <baseClassMapping>
+                            <contractPackageRegex>.*bar.*account.*</contractPackageRegex>
+                            <baseClassFQN>com.demo.account.contracts.AccountRestBar</baseClassFQN>
+                        </baseClassMapping>
+                        <baseClassMapping>
+                            <contractPackageRegex>.*foo.*message.*</contractPackageRegex>
+                            <baseClassFQN>com.demo.account.contracts.MessageServiceFoo</baseClassFQN>
+                        </baseClassMapping>
+                        <baseClassMapping>
+                            <contractPackageRegex>.*foo.*account.*</contractPackageRegex>
+                            <baseClassFQN>com.demo.account.contracts.AccountRestFoo</baseClassFQN>
+                        </baseClassMapping>
+                    </baseClassMappings>
+                    <packageWithBaseClasses>com.demo.account.contracts</packageWithBaseClasses>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -54,8 +75,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- end::test_dep_in_plugin[] -->
-
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
@@ -68,7 +87,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- SPRING CLOUD CONTRACT -->
         </plugins>
     </build>
 </project>

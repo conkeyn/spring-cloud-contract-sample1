@@ -30,6 +30,8 @@ public class SubscriptionService {
         } else {
             notEligibleCounter.incrementAndGet();
         }
+
+        //发送到新的队列上
         output1.output1().send(MessageBuilder.withPayload(
                 new MiddleServiceMessage(verification.eligible, eligibleCounter.get(),
                         notEligibleCounter.get(), "tranform from middle serivce.")).build());

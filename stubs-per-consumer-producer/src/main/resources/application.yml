@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: stubs-per-consumer-producer
+  cloud:
+    stream:
+      bindings:
+        output:
+          contentType: "application/json"
+          destination: verifications

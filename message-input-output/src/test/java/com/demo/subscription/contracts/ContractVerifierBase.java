@@ -33,14 +33,14 @@ public class ContractVerifierBase {
     @Autowired
     private SubscriptionService service;
 
-
     @Before
     public void  setup(){
+        //配置模拟延迟从消息队列中接收消息
         verifier.receive("output1",100, TimeUnit.MILLISECONDS);
     }
 
-
     public void triggeMessageFromSourceStub(){
+        //触发account-service::stubs输出消息到消息队列中。
         trigger.trigger("accepted_verification");
     }
 }
